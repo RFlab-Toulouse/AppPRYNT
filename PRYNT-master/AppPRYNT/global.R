@@ -19,9 +19,16 @@ usePackage_bioconductor <- function(p)
   require(p, character.only = TRUE)
 }
 
+
+# Charger le package depuis GitHub
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+devtools::install_github("PRYNT-master/AppPRYNT/RandomWalkRestartMH")
 library(RandomWalkRestartMH)
-usePackage("RandomWalkRestartMH")
-usePackage_bioconductor("RandomWalkRestartMH")
+
+# usePackage("RandomWalkRestartMH")
+#usePackage_bioconductor("RandomWalkRestartMH")
 usePackage_bioconductor("STRINGdb") 
 #######Functions#######
 
