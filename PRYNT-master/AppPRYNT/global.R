@@ -24,8 +24,9 @@ usePackage_bioconductor <- function(p)
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
-devtools::install_github("PRYNT-master/AppPRYNT/RandomWalkRestartMH/RandomWalkRestartMH_new")
-library(RandomWalkRestartMH)
+source("AppPRYNT\RandomWalkRestartMH\RandomWalkRestartMH")
+# devtools::install_github("PRYNT-master/AppPRYNT/RandomWalkRestartMH/RandomWalkRestartMH_new")
+# library(RandomWalkRestartMH)
 
 # usePackage("RandomWalkRestartMH")
 #usePackage_bioconductor("RandomWalkRestartMH")
