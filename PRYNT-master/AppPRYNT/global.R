@@ -165,6 +165,11 @@ downloaddataset<-function(x,file,cnames=T,rnames=T){
 
 
 
+# Supprimer ces lignes à la fin du fichier global.R car elles causent l'erreur
+# string_network<<-string_db$get_interactions(string_ids =annotation[,1] )
+# string_network_900<<-string_network[string_network$combined_score>=900,]
+# proteins_900<<-unique(c(string_network_900$from,string_network_900$to))
+
 ########download the PPI network#####
 ###from string package
 print("loading String Database")
@@ -185,7 +190,12 @@ initializer <- function() {
   ))
 }
 
+# Initialisation des données au démarrage
+data <- initializer()
 
-string_network<<-string_db$get_interactions(string_ids =annotation[,1] )
-string_network_900<<-string_network[string_network$combined_score>=900,]
-proteins_900<<-unique(c(string_network_900$from,string_network_900$to))
+# Rendre les données disponibles globalement si nécessaire
+string_db <- data$string_db
+annotation <- data$annotation
+string_network <- data$string_network
+string_network_900 <- data$string_network_900
+proteins_900 <- data$proteins_900
