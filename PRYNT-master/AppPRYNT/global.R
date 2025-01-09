@@ -17,11 +17,11 @@ usePackage_bioconductor <- function(p) {
     install.packages("BiocManager")
   }
   if (!is.element(p, installed.packages()[,1])) {
-    BiocManager::install(pkgs = p, update = FALSE)
-  }
-  if (!is.element(p, installed.packages()[,1]) & p %in% c("Rgraphviz", "STRINGdb")) {
     BiocManager::install(pkgs = p, update = TRUE, force = TRUE)
   }
+  # if (!is.element(p, installed.packages()[,1]) & p %in% c("Rgraphviz", "STRINGdb")) {
+  #   BiocManager::install(pkgs = p, update = TRUE, force = TRUE)
+  # }
   require(p, character.only = TRUE)
 }
 
@@ -46,6 +46,7 @@ packages_to_install <- function() {
   }
 }
 
+packages_to_install()
 library(RandomWalkRestartMH)
 # usePackage("RandomWalkRestartMH")
 # usePackage_bioconductor("RandomWalkRestartMH")
