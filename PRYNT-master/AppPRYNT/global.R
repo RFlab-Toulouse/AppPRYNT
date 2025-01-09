@@ -6,7 +6,7 @@ usePackage <- function(p) {
   require(p, character.only = TRUE)
 }
 
-usePackage("igraph")
+#usePackage("igraph")
 usePackage("zoo")
 usePackage("DT")
 
@@ -18,6 +18,9 @@ usePackage_bioconductor <- function(p) {
   }
   if (!is.element(p, installed.packages()[,1])) {
     BiocManager::install(pkgs = p, update = FALSE)
+  }
+  if (!is.element(p, installed.packages()[,1]) & p %in% c("Rgraphviz", "STRINGdb")) {
+    BiocManager::install(pkgs = p, update = FALSE, force = TRUE)
   }
   require(p, character.only = TRUE)
 }
