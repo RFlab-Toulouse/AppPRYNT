@@ -210,7 +210,7 @@ server <- function(input, output) {
     
   })
   
-  output$table =renderDataTable( {RESULTS()$PRYNT }, options = list(    "orderClasses" = F,
+  output$table =DT::renderDT( {RESULTS()$PRYNT }, options = list(    "orderClasses" = F,
                                                                  "responsive" = F,
                                                                  "pageLength" = 10,
                                                                  "rownames"=TRUE,
