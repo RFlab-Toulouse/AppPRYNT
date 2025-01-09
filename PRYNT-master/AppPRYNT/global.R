@@ -1,29 +1,52 @@
 ####Packages####
-usePackage <- function(p) 
-{
-  if (!is.element(p, installed.packages()[,1]))
+usePackage <- function(p) {
+  if (!is.element(p, installed.packages()[,1])) {
     install.packages(p, dep = TRUE)
+  }
   require(p, character.only = TRUE)
 }
+
 usePackage("igraph")
 usePackage("zoo")
 usePackage("DT")
 
 usePackage("shinycssloaders")
 
-
-usePackage_bioconductor <- function(p) 
-{
-  if (!requireNamespace("BiocManager", quietly = TRUE)){install.packages("BiocManager")}
-  
-  if (!is.element(p, installed.packages()[,1])){BiocManager::install(pkgs = p,update = FALSE)}
+usePackage_bioconductor <- function(p) {
+  if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+  }
+  if (!is.element(p, installed.packages()[,1])) {
+    BiocManager::install(pkgs = p, update = FALSE)
+  }
   require(p, character.only = TRUE)
 }
 
+
+# Installation des packages requis
+packages_to_install <- function() {
+  # Packages de base
+  usePackage("devtools")
+  usePackage("shiny")
+  
+  # Packages Bioconductor
+  usePackage_bioconductor("STRINGdb")
+  usePackage_bioconductor("Rgraphviz")
+  
+  # Packages GitHub
+  if (!require("dnet")) {
+    devtools::install_github("hfang-bristol/dnet", upgrade = "never")
+  }
+  
+  if (!require("RandomWalkRestartMH")) {
+    devtools::install_github("alberto-valdeolivas/RandomWalkRestartMH", upgrade = "never")
+  }
+}
+
 library(RandomWalkRestartMH)
-usePackage("RandomWalkRestartMH")
-usePackage_bioconductor("RandomWalkRestartMH")
-usePackage_bioconductor("STRINGdb") 
+# usePackage("RandomWalkRestartMH")
+# usePackage_bioconductor("RandomWalkRestartMH")
+# usePackage_bioconductor("STRINGdb") 
 #######Functions#######
 
 memory.limit(size =8078 )
