@@ -19,17 +19,9 @@ usePackage_bioconductor <- function(p)
   require(p, character.only = TRUE)
 }
 
-
-# Charger le package depuis GitHub
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
-source("AppPRYNT\RandomWalkRestartMH\RandomWalkRestartMH")
-# devtools::install_github("PRYNT-master/AppPRYNT/RandomWalkRestartMH/RandomWalkRestartMH_new")
-# library(RandomWalkRestartMH)
-
-# usePackage("RandomWalkRestartMH")
-#usePackage_bioconductor("RandomWalkRestartMH")
+library(RandomWalkRestartMH)
+usePackage("RandomWalkRestartMH")
+usePackage_bioconductor("RandomWalkRestartMH")
 usePackage_bioconductor("STRINGdb") 
 #######Functions#######
 
