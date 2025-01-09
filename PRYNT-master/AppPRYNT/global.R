@@ -162,10 +162,22 @@ downloaddataset<-function(x,file,cnames=T,rnames=T){
 ########download the PPI network#####
 ###from string package
 print("loading String Database")
-string_db <<- STRINGdb$new(version="11", species=9606,
-                          score_threshold=0, input_directory="" )
-
-annotation<<-string_db$get_proteins()
+initializer <- function() {
+  string_db <- STRINGdb$new(version="11", species=9606,
+                            score_threshold=0, input_directory="")
+  annotation <- string_db$get_proteins()
+  string_network <- string_db$get_interactions(string_ids = annotation[,1])
+  string_network_900 <- string_network[string_network$combined_score>=900,]
+  proteins_900 <- unique(c(string_network_900$from, string_network_900$to))
+  
+  return(list(
+    string_db = string_db,
+    annotation = annotation,
+    string_network = string_network,
+    string_network_900 = string_network_900,
+    proteins_900 = proteins_900
+  ))
+}
 
 
 string_network<<-string_db$get_interactions(string_ids =annotation[,1] )
